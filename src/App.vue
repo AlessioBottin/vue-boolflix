@@ -36,7 +36,6 @@ export default {
           }
         }
       ).then((response) => {
-        console.log(response.data.results);
         this.moviesArray = response.data.results;
       });
     }, 
