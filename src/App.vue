@@ -1,28 +1,59 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    
+    <SearchBar @updateFilter="setFilter"/>
+
+    <main>
+      <MovieCard v-for="(movie, index) in moviesArray" :key="index" :movieObject="movie"/>
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import SearchBar from "./components/SearchBar.vue";
+import MovieCard from "./components/MovieCard.vue";
+import axios from 'axios';
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    SearchBar,
+    MovieCard,
+  },
+  data: function() {
+    return {
+      userSearch: '',
+      moviesArray: [],
+    }
+  },
+  methods: {
+    getMovies: function() {
+      axios.get('https://api.themoviedb.org/3/search/movie', 
+        {
+          params: {
+            api_key: 'da14a988ea19f92a78280e6b0dc105c9',
+            query: this.userSearch,
+          }
+        }
+      ).then((response) => {
+        console.log(response.data.results);
+        this.moviesArray = response.data.results;
+      });
+    }, 
+    setFilter: function(searchText) {
+      this.userSearch = searchText;
+      this.getMovies();
+    }
   },
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import './style/general.scss';
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 </style>
