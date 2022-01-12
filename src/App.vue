@@ -3,22 +3,21 @@
     
     <SearchBar @updateFilter="setFilter"/>
 
-    <main>
-      <MovieCard v-for="(movie, index) in moviesArray" :key="index" :movieObject="movie"/>
-    </main>
+    <Main :movies="moviesArray"/>
+    
   </div>
 </template>
 
 <script>
 import SearchBar from "./components/SearchBar.vue";
-import MovieCard from "./components/MovieCard.vue";
+import Main from "./components/Main.vue";
 import axios from 'axios';
 
 export default {
   name: "App",
   components: {
     SearchBar,
-    MovieCard,
+    Main,
   },
   data: function() {
     return {
@@ -27,6 +26,10 @@ export default {
     }
   },
   methods: {
+    setFilter: function(searchText) {
+      this.userSearch = searchText;
+      this.getMovies();
+    },
     getMovies: function() {
       axios.get('https://api.themoviedb.org/3/search/movie', 
         {
@@ -39,10 +42,6 @@ export default {
         this.moviesArray = response.data.results;
       });
     }, 
-    setFilter: function(searchText) {
-      this.userSearch = searchText;
-      this.getMovies();
-    }
   },
 };
 </script>
@@ -50,9 +49,5 @@ export default {
 <style lang="scss">
 @import './style/general.scss';
 
-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+
 </style>
