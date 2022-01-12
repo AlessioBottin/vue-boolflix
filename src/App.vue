@@ -3,7 +3,7 @@
     
     <SearchBar @updateFilter="setFilter"/>
 
-    <Main :movies="moviesArray"/>
+    <Main :movies="moviesArray" :series="seriesArray"/>
     
   </div>
 </template>
@@ -21,25 +21,40 @@ export default {
   },
   data: function() {
     return {
+      apiKey: 'da14a988ea19f92a78280e6b0dc105c9',
       userSearch: '',
       moviesArray: [],
+      seriesArray: []
     }
   },
   methods: {
     setFilter: function(searchText) {
       this.userSearch = searchText;
       this.getMovies();
+      this.getSeries();
     },
     getMovies: function() {
       axios.get('https://api.themoviedb.org/3/search/movie', 
         {
           params: {
-            api_key: 'da14a988ea19f92a78280e6b0dc105c9',
+            api_key: this.apiKey,
             query: this.userSearch,
           }
         }
       ).then((response) => {
         this.moviesArray = response.data.results;
+      });
+    }, 
+    getSeries: function() {
+      axios.get('https://api.themoviedb.org/3/search/movie', 
+        {
+          params: {
+            api_key: this.apiKey,
+            query: this.userSearch,
+          }
+        }
+      ).then((response) => {
+        this.seriesArray = response.data.results;
       });
     }, 
   },

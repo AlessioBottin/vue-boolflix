@@ -8,6 +8,12 @@
                 <MovieCard v-for="(movie, index) in movies" :key="index" :movieObject="movie"/>
             </div>
 
+            <!-- TV Series  -->
+            <h2>TV Series</h2>
+            <div class="movie-container">
+                <MovieCard v-for="(serie, index) in series" :key="index" :serieObject="serie"/>
+            </div>
+
         </div>
     </main>
 </template>
@@ -21,8 +27,9 @@ export default {
         MovieCard
     },
     props: {
-        movies: Array
-    }
+        movies: Array,
+        series: Array
+    },
 }
 </script>
 
