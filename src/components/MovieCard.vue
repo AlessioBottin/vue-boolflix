@@ -4,7 +4,7 @@
             <ul>
                 <li>Titolo: {{ movieObject.title }}</li>
                 <li>Titolo originale: {{ movieObject.original_title }}</li>
-                <li id="language">Lingua originale: {{ getLanguageFlag() }}</li>
+                <li v-html="getLanguageFlag()"></li>
                 <li>Voto: {{ movieObject.vote_average }}</li>
             </ul>
         </div>
@@ -27,13 +27,12 @@ export default {
         getLanguageFlag: function() {
 
             if( this.availableFlags.includes(this.movieLanguage) ) {
-                this.flagPath = `<img src="require(../assets/img/${this.movieLanguage}.png)" alt="${this.movieLanguage} flag">`;
+                this.flagPath = `Lingua originale: <img src="require(../assets/img/${this.movieLanguage}.png)" alt="${this.movieLanguage} flag">`;
             }else {
-                this.flagPath = `<span class="flag">${this.movieLanguage}<span/>`;
+                this.flagPath = `Lingua originale: <span class="flag">${this.movieLanguage}<span/>`;
             }
 
-            document.getElementById('language').innerHTML = this.flagPath;
-            return '';
+            return this.flagPath;
         }
     }
 }
