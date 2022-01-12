@@ -2,10 +2,10 @@
     <section class="movie-card">
         <div class="container">
             <ul>
-                <li>{{ movieObject.title }}</li>
-                <li>{{ movieObject.original_title }}</li>
-                <li>{{ movieObject.original_language }}</li>
-                <li>{{ movieObject.vote_average }}</li>
+                <li>Titolo: {{ movieObject.title }}</li>
+                <li>Titolo originale: {{ movieObject.original_title }}</li>
+                <li id="language">Lingua originale: {{ getLanguageFlag() }}</li>
+                <li>Voto: {{ movieObject.vote_average }}</li>
             </ul>
         </div>
     </section>
@@ -15,6 +15,26 @@ export default {
     name: 'MovieCard',
     props: {
         movieObject: Object
+    },
+    data: function() {
+        return {
+            availableFlags: ['it', 'en'],
+            movieLanguage: this.movieObject.original_language,
+            flagPath: '',
+        }
+    },
+    methods: {
+        getLanguageFlag: function() {
+
+            if( this.availableFlags.includes(this.movieLanguage) ) {
+                this.flagPath = `<img src="require(../assets/img/${this.movieLanguage}.png)" alt="${this.movieLanguage} flag">`;
+            }else {
+                this.flagPath = `<span class="flag">${this.movieLanguage}<span/>`;
+            }
+
+            document.getElementById('language').innerHTML = this.flagPath;
+            return '';
+        }
     }
 }
 </script>
