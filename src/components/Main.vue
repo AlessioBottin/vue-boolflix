@@ -11,7 +11,7 @@
             <!-- TV Series  -->
             <h2>TV Series</h2>
             <div class="movie-container">
-                <MovieCard v-for="(serie, index) in series" :key="index" :serieObject="serie"/>
+                <SerieCard v-for="(serie, index) in series" :key="index" :serieObject="serie"/>
             </div>
 
         </div>
@@ -20,11 +20,13 @@
 
 <script>
 import MovieCard from "./MovieCard.vue";
+import SerieCard from "./SerieCard.vue";
 
 export default {
     name: 'Main',
     components: {
-        MovieCard
+        MovieCard,
+        SerieCard
     },
     props: {
         movies: Array,

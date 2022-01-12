@@ -2,9 +2,21 @@
     <section class="movie-card">
         <div class="container">
             <ul>
+                <div v-if="movieObject.poster_path !== null" class="poster">
+                    <img :src="'https://image.tmdb.org/t/p/w342' + movieObject.poster_path" :alt="movieObject.name">
+                </div>
                 <li>Titolo: {{ movieObject.title }}</li>
                 <li>Titolo originale: {{ movieObject.original_title }}</li>
-                <li v-html="getLanguageFlag()"></li>
+                <li>
+                    Lingua originale: 
+
+                    <img v-if="availableFlags.includes(movieLanguage)" 
+                        :src="require('../assets/img/'+movieLanguage+'.png')" 
+                        :alt="movieLanguage+'flag'"
+                    >
+
+                    <span v-else class="flag">{{movieLanguage}}</span>
+                </li>
                 <li>Voto: {{ movieObject.vote_average }}</li>
             </ul>
         </div>
@@ -15,25 +27,15 @@ export default {
     name: 'MovieCard',
     props: {
         movieObject: Object,
-        serieObject: Object
     },
     data: function() {
         return {
             availableFlags: ['it', 'en'],
-            movieLanguage: this.movieObject.original_language,
-            flagPath: '',
         }
     },
-    methods: {
-        getLanguageFlag: function() {
-
-            if( this.availableFlags.includes(this.movieLanguage) ) {
-                this.flagPath = `Lingua originale: <img src="require(../assets/img/${this.movieLanguage}.png)" alt="${this.movieLanguage} flag">`;
-            }else {
-                this.flagPath = `Lingua originale: <span class="flag">${this.movieLanguage}<span/>`;
-            }
-
-            return this.flagPath;
+    computed:{
+        movieLanguage(){
+            return this.movieObject.original_language
         }
     }
 }

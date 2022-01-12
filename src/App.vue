@@ -46,7 +46,7 @@ export default {
       });
     }, 
     getSeries: function() {
-      axios.get('https://api.themoviedb.org/3/search/movie', 
+      axios.get('https://api.themoviedb.org/3/search/tv', 
         {
           params: {
             api_key: this.apiKey,
