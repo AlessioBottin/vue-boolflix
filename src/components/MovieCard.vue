@@ -2,21 +2,31 @@
     <section class="movie-card">
         <div class="container">
             <ul>
+                <!-- Poster  -->
                 <div v-if="movieObject.poster_path !== null" class="poster">
                     <img :src="'https://image.tmdb.org/t/p/w342' + movieObject.poster_path" :alt="movieObject.name">
                 </div>
-                <li>Titolo: {{ movieObject.title }}</li>
-                <li>Titolo originale: {{ movieObject.original_title }}</li>
+
+                <!-- Title  -->
+                   <!-- if movieObject.title exist then                else  -->
+                <li>Titolo: {{ movieObject.title ? movieObject.title : movieObject.name }}</li>
+                <li>Titolo originale: {{ movieObject.original_title ? movieObject.original_title : movieObject.original_nam }}</li>
+
+                <!-- Language  -->
                 <li>
                     Lingua originale: 
 
+                    <!-- Flag image if available   -->
                     <img v-if="availableFlags.includes(movieLanguage)" 
                         :src="require('../assets/img/'+movieLanguage+'.png')" 
                         :alt="movieLanguage+'flag'"
                     >
 
+                    <!-- Language text  -->
                     <span v-else class="flag">{{movieLanguage}}</span>
                 </li>
+
+                <!-- Rating  -->
                 <li>Voto: 
                     <span class="vote">
                         <div class="yellow" v-for="star in movieStar" :key="star"><i class="fas fa-star"></i></div>
@@ -51,11 +61,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../style/utilities.scss';
+@import '../style/variables.scss';
+
+
 .movie-card {
     border: 1px solid black;
     width: calc( (100% / 10) - 10px);
     text-align: center;
     margin: 0 5px 10px 5px;
+    flex-shrink: 0;
 
     .container {
         

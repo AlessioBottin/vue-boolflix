@@ -2,7 +2,7 @@
     <section class="search-bar">
         <div class="container">
             <input type="text" placeholder="Inserisci il nome di un film/serie TV" v-model="userSearch">
-            <button @click="$emit('updateFilter', userSearch)">Cerca</button>
+            <button @click="$emit('updateSearch', userSearch)" class="btn">Cerca</button>
         </div>
     </section>
 </template>
@@ -19,9 +19,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../style/utilities.scss';
+
 .search-bar {
-    padding: 30px;
     .container {
+        display: flex;
 
         // Input 
         input {
@@ -29,15 +31,12 @@ export default {
             padding: 10px 20px;
             border-radius: 5px;
             margin: 0 10px;
-            border: 1px solid lightblue;
+            border: 2px solid white;
+            outline: none;
         }
+        
 
         // Button 
-        button {
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: 1px solid lightblue;
-        }
     }
 }
 </style>

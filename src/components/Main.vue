@@ -9,9 +9,9 @@
             </div>
 
             <!-- TV Series  -->
-            <h2>TV Series</h2>
+            <h2 class="tv">TV Series</h2>
             <div class="movie-container">
-                <SerieCard v-for="(serie, index) in series" :key="index" :serieObject="serie"/>
+                <MovieCard v-for="(serie, index) in series" :key="index" :movieObject="serie"/>
             </div>
 
         </div>
@@ -20,13 +20,11 @@
 
 <script>
 import MovieCard from "./MovieCard.vue";
-import SerieCard from "./SerieCard.vue";
 
 export default {
     name: 'Main',
     components: {
         MovieCard,
-        SerieCard
     },
     props: {
         movies: Array,
@@ -36,13 +34,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-main {
+@import '../style/utilities.scss';
+@import '../style/variables.scss';
 
-  .movie-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-      
-  }
+main {
+   background-color: #181818; 
+   color: white;
+   padding: 60px 0;
+
+    .container {
+
+        h2 {
+            font-size: 50px;
+            margin: 30px 0;
+        }
+
+        // h2.tv {
+            
+        // }
+
+       .movie-container {
+            display: flex;
+            justify-content: left;
+            overflow-x: auto;
+            padding-bottom: 50px;
+        }
+    }
+
+  
 }
 </style>
