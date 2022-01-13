@@ -17,7 +17,11 @@
 
                     <span v-else class="flag">{{serieLanguage}}</span>
                 </li>
-                <li>Voto: {{ serieObject.vote_average }}</li>
+                <li>Voto: 
+                    <span class="vote">
+                        <div class="yellow" v-for="star in serieStar" :key="star"><i class="fas fa-star"></i></div>
+                        <div class="grey" v-for="greyStar in (5 - serieStar)" :key="greyStar+'grey'"><i class="fas fa-star"></i></div>
+                    </span></li>
             </ul>
         </div>
     </section>
@@ -36,6 +40,10 @@ export default {
     computed:{
         serieLanguage(){
             return this.serieObject.original_language
+        },
+        serieStar() {
+           let starCount = Math.ceil(this.serieObject.vote_average / 2);
+           return starCount;
         }
     }
 }
@@ -46,7 +54,7 @@ export default {
     border: 1px solid black;
     width: calc( (100% / 10) - 10px);
     text-align: center;
-    margin-bottom: 10px;
+    margin: 0 5px 10px 5px;
 
     .container {
         
@@ -54,6 +62,24 @@ export default {
 
             li {
                margin-bottom: 5px; 
+
+                .vote {
+                   display: flex;
+                   flex-wrap: wrap;
+                   justify-content: center;
+
+                    .yellow {
+                        color: yellow;
+                        display: flex;
+                        flex-wrap: wrap
+                    }
+
+                    .gray {
+                        color: gray;
+                        display: flex;
+                        flex-wrap: wrap
+                    }
+                }
             }
         }
     }

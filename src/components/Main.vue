@@ -41,7 +41,7 @@ main {
   .movie-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: left;
       
   }
 }
