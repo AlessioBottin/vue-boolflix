@@ -49,15 +49,15 @@ main {
             margin: 30px 0;
         }
 
-        // h2.tv {
-            
-        // }
-
        .movie-container {
             display: flex;
             justify-content: left;
             overflow-x: auto;
             padding-bottom: 50px;
+
+            .movie-card:first-child {
+                margin-left: 0;
+            }
         }
     }
 

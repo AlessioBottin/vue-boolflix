@@ -1,7 +1,7 @@
 <template>
     <section class="search-bar">
         <div class="container">
-            <input type="text" placeholder="Inserisci il nome di un film/serie TV" v-model="userSearch">
+            <input type="text" @keyup.enter="$emit('updateSearch', userSearch)" placeholder="Inserisci il nome di un film/serie TV" v-model="userSearch">
             <button @click="$emit('updateSearch', userSearch)" class="btn">Cerca</button>
         </div>
     </section>

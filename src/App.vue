@@ -67,17 +67,64 @@ export default {
 @import './style/general.scss';
 @import './style/utilities.scss';
 
+// Scrollbar 
 html::-webkit-scrollbar {
-  width: 10px;
+  width: 0.8vw;
 }
 
 html::-webkit-scrollbar-thumb {
-  background-color: $brand_color;
+  background-color: $brand_color; 
+  border-radius: 7px;
+
+  &:hover {
+    background-color: rgb(255, 57, 57)
+  }
 }
 
 html::-webkit-scrollbar-track {
   background-color: rgb(65, 65, 65);
 }
 
+// Firefox 
+html {
+  scrollbar-color: $brand_color rgb(65, 65, 65);
+  scrollbar-width: 0.8vw;
+}
+
+// Slider 
+// html::-webkit-slider-thumb {
+//   background-color: $brand_color; 
+//   border-radius: 7px;
+
+//   &:hover {
+//     background-color: rgb(255, 57, 57)
+//   }
+// }
+
+// html::-webkit-slider-runnable-track {
+//   background-color: rgb(65, 65, 65);
+// }
+
+// html::-webkit-slider {
+//   height: 10px;
+// }
+
+// Scrollbar horizontal
+html::-webkit-scrollbar:horizontal {
+  height: 20px;
+}
+
+html::-webkit-scrollbar-thumb:horizontal {
+  background-color: $brand_color; 
+  border-radius: 7px;
+
+  &:hover {
+    background-color: rgb(255, 57, 57)
+  }
+}
+
+html::-webkit-scrollbar-track:horizontal {
+  background-color: rgb(65, 65, 65);
+}
 
 </style>
