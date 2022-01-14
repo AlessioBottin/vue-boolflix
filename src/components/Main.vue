@@ -37,6 +37,27 @@ export default {
 @import '../style/utilities.scss';
 @import '../style/variables.scss';
 
+// Scrollbar 
+.movie-container::-webkit-scrollbar {
+  width: 0.4vw;
+  height: 10px;
+}
+
+.movie-container::-webkit-scrollbar-thumb {
+  background-color: $brand_color; 
+  border-radius: 7px;
+}
+
+.movie-container::-webkit-scrollbar-track {
+  background-color: #181818;
+}
+
+// Firefox 
+.movie-container {
+  scrollbar-color: $brand_color #181818;
+  scrollbar-width: 0.4vw;
+}
+
 main {
    background-color: #181818; 
    color: white;

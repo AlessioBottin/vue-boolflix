@@ -80,7 +80,6 @@ export default {
 @import '../style/variables.scss';
 
 
-
 .movie-card {
     border: 1px solid black;
     width: calc( (100% / 7) - 10px);
@@ -123,6 +122,7 @@ export default {
 
                     .title {
                         font-size: 1.3vw;
+                        text-align: center;
                     }
                 }
 
@@ -142,11 +142,15 @@ export default {
                 .language {
                     display: flex;
                     flex-direction: row;
-                    align-items: flex-end;
+                    align-items: baseline;
 
                     .flag {
                         width: 10%;
                         margin-left: 5px;
+                    }
+
+                    span.flag {
+                        text-transform: uppercase;
                     }
                 }
 
