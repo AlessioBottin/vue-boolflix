@@ -87,20 +87,18 @@ export default {
                 type = 'tv';
             }
 
-            console.log(type);
-            console.log(this.movieObject.id);
             axios.get(
                 `https://api.themoviedb.org/3/${type}/${this.movieObject.id}/credits`,
                 {
                     params: {
-                        api_key: this.apiKey,
+                        // the api is not working for series by passing the key through a data 
+                        api_key: 'da14a988ea19f92a78280e6b0dc105c9',
                     }
                 }
             ).then((response) => {
                 // Avoids infinite loop 
                 if(response.data.cast.length < 5) {
                     this.cast = response.data.cast;
-                    console.log(this.cast);
                 }else {
                     const castArray = [];
 
