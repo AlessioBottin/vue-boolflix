@@ -5,7 +5,7 @@
             <!-- Films  -->
             <h2>Film</h2>
             <div class="movie-container">
-                <MovieCard v-for="(movie, index) in movies" :key="index" :movieObject="movie"/>
+                <MovieCard v-for="(movie, index) in movies" :key="index" :movieObject="movie" :apiKey="apiParam"/>
             </div>
 
             <!-- TV Series  -->
@@ -28,7 +28,8 @@ export default {
     },
     props: {
         movies: Array,
-        series: Array
+        series: Array,
+        apiParam: String
     },
 }
 </script>

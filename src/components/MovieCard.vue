@@ -1,6 +1,6 @@
 <template>
     <section class="movie-card">
-        <div class="card-container">
+        <div class="card-container" @mouseenter="getCast()">
             <ul>
                 <!-- Poster  -->
                 <li class="poster">
@@ -21,7 +21,6 @@
                 <!-- Movie Info  -->
                 <li class="movie-info">
                     <!-- Title  -->
-                    <!-- if movieObject.title exist then                else  -->
                     <div class="info-line">Titolo: {{ movieObject.title ? movieObject.title : movieObject.name }}</div>
                     <div class="info-line">Titolo originale: {{ movieObject.original_title ? movieObject.original_title : movieObject.original_nam }}</div>
 
@@ -47,20 +46,69 @@
                             <div class="grey" v-for="greyStar in (5 - movieStar)" :key="greyStar+'grey'"><i class="fas fa-star"></i></div>
                         </span>
                     </div>
+
+                    <!-- Cast  -->
+                    <div class="info-line cast">
+                        Cast:
+                        
+                        <div class="actor" v-for="(actor, index) in cast" :key="index" >
+                            {{ actor.name }}
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
     </section>
 </template>
+
 <script>
+import axios from 'axios';
+
 export default {
     name: 'MovieCard',
     props: {
         movieObject: Object,
+        apiKey: String
     },
     data: function() {
         return {
             availableFlags: ['it', 'en'],
+            cast: []
+        }
+    },
+    methods: {
+        getCast: function() {
+
+            let type = '';
+            if(this.movieObject.title) {
+                type = 'movie';
+            } else {
+                type = 'tv';
+            }
+            console.log(type);
+            console.log(this.movieObject.id);
+            axios.get(
+                `https://api.themoviedb.org/3/${type}/${this.movieObject.id}/credits`,
+                {
+                    params: {
+                        api_key: this.apiKey,
+                    }
+                }
+            ).then((response) => {
+                // Avoids infinite loop 
+                if(response.data.cast.length < 5) {
+                    this.cast = response.data.cast;
+                    console.log(this.cast);
+                }else {
+                    const castArray = [];
+
+                    for( let i = 0; castArray.length < 5; i++) {
+                        let thisActor = response.data.cast[i];
+                        castArray.push(thisActor);
+                        this.cast = castArray;
+                    }
+                }   
+            }); 
         }
     },
     computed:{
@@ -70,7 +118,7 @@ export default {
         movieStar() {
            let starCount = Math.ceil(this.movieObject.vote_average / 2);
            return starCount;
-        }
+        },
     }
 }
 </script>
@@ -177,6 +225,14 @@ export default {
                        color: gray;
                        display: flex;
                        flex-wrap: wrap
+                    }
+                }
+
+                // Cast 
+                .cast {
+
+                    .actor {
+                        margin: 10px 0;
                     }
                 }
             }

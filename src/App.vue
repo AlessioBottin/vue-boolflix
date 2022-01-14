@@ -3,7 +3,7 @@
     
     <Header @setUserSearch="setFilter"/>
 
-    <Main :movies="moviesArray" :series="seriesArray"/>
+    <Main :movies="moviesArray" :series="seriesArray" :apiParam="apiKey"/>
     
   </div>
 </template>
@@ -89,42 +89,6 @@ html::-webkit-scrollbar-track {
 html {
   scrollbar-color: $brand_color rgb(65, 65, 65);
   scrollbar-width: 0.8vw;
-}
-
-// Slider 
-// html::-webkit-slider-thumb {
-//   background-color: $brand_color; 
-//   border-radius: 7px;
-
-//   &:hover {
-//     background-color: rgb(255, 57, 57)
-//   }
-// }
-
-// html::-webkit-slider-runnable-track {
-//   background-color: rgb(65, 65, 65);
-// }
-
-// html::-webkit-slider {
-//   height: 10px;
-// }
-
-// Scrollbar horizontal
-html::-webkit-scrollbar:horizontal {
-  height: 20px;
-}
-
-html::-webkit-scrollbar-thumb:horizontal {
-  background-color: $brand_color; 
-  border-radius: 7px;
-
-  &:hover {
-    background-color: rgb(255, 57, 57)
-  }
-}
-
-html::-webkit-scrollbar-track:horizontal {
-  background-color: rgb(65, 65, 65);
 }
 
 </style>
