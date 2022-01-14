@@ -1,6 +1,6 @@
 <template>
     <section class="movie-card">
-        <div class="card-container" @mouseenter="getCast()">
+        <div class="card-container" @mouseenter="getCastandGenres()">
             <ul>
                 <!-- Poster  -->
                 <li class="poster">
@@ -55,6 +55,13 @@
                             {{ actor.name }}
                         </div>
                     </div>
+
+                    <!-- Genres  -->
+                    <div class="info-line genres" >
+                        <div class="genre" v-for="(genre, index) in genres" :key="index">
+                            {{ genre.name }}
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -73,11 +80,12 @@ export default {
     data: function() {
         return {
             availableFlags: ['it', 'en'],
-            cast: []
+            cast: [],
+            genres: []
         }
     },
     methods: {
-        getCast: function() {
+        getCastandGenres: function() {
             let type = '';
 
             // if(this.movieObject.title) returns true if the 'title' KEY of movieObject exists 
@@ -87,6 +95,7 @@ export default {
                 type = 'tv';
             }
 
+            // Get the cast 
             axios.get(
                 `https://api.themoviedb.org/3/${type}/${this.movieObject.id}/credits`,
                 {
@@ -108,8 +117,21 @@ export default {
                         this.cast = castArray;
                     }
                 }   
-            }); 
-        }
+            });
+            
+            // Get the genres 
+            axios.get(
+                `https://api.themoviedb.org/3/${type}/${this.movieObject.id}`,
+                {
+                    params: {
+                        // the api is not working for series by passing the key through a data 
+                        api_key: 'da14a988ea19f92a78280e6b0dc105c9',
+                    }
+                }
+            ).then((response) => {
+                this.genres = response.data.genres;
+            });
+        }   
     },
     computed:{
         movieLanguage(){
@@ -182,7 +204,7 @@ export default {
 
                 // Info lines 
                 .info-line {
-                    margin-bottom: 10px;
+                    margin-bottom: 7px;
                     font-weight: bold;
                 }
 
@@ -232,7 +254,24 @@ export default {
                 .cast {
 
                     .actor {
-                        margin: 10px 0;
+                        margin: 5px 0;
+                        font-size: 0.8vw;
+                    }
+                }
+
+                // Genres 
+                .genres {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: left;
+                    flex-wrap: wrap;
+
+                    .genre {
+                        padding: 5px;
+                        background-color: $brand_color;
+                        color: white;
+                        font-size: 0.6vw;
+                        margin: 5px 5px 0 0;
                     }
                 }
             }
