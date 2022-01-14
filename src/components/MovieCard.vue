@@ -78,13 +78,15 @@ export default {
     },
     methods: {
         getCast: function() {
-
             let type = '';
-            if(this.movieObject.title) {
+
+            // if(this.movieObject.title) returns true if the 'title' KEY of movieObject exists 
+            if(this.movieObject.title) {  
                 type = 'movie';
             } else {
                 type = 'tv';
             }
+
             console.log(type);
             console.log(this.movieObject.id);
             axios.get(

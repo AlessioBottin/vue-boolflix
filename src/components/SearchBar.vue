@@ -29,10 +29,13 @@ export default {
         input {
             width: 300px;
             padding: 10px 20px;
-            border-radius: 5px;
             margin: 0 10px;
-            border: 2px solid white;
             outline: none;
+            border-radius: 10px;
+            color: white;
+            border: 2px solid white;
+            background-color: black;
+            display: inline-block;
         }
         
 
